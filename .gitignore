@@ -1,0 +1,22 @@
+# Build files
+/build/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+compile_commands.json
+
+# VS Code settings
+.vscode/
+
+# Windows & Editor
+*.exe
+*.obj
+*.log
+*.tmp
+*.user
+*.DS_Store
+
+# Backup files
+*~
+*.swp
