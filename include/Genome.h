@@ -10,3 +10,8 @@
  * - const SNP* getSNPByID string& rsID const 
  * 
  */
+
+ class Genome
+ {
+
+ };

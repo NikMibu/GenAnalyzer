@@ -13,3 +13,8 @@
  * - void saveResults(const std::string& filename)
  * - void printSummary()
  */
+
+ class Analyzer
+ {
+
+ };
