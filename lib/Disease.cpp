@@ -39,7 +39,11 @@ const std::vector<DiseaseSNP>& Disease::getRiskSNPs() const {
 }
 
 void Disease::printRiskSNPs() const {
+    std::cout << "---------------------------"<< std::endl;
+    std::cout << "RiskSNPs of Disease: " << getName() << std::endl;
     for (const auto& snp : getRiskSNPs()) {
         std::cout << "✔ " << snp.rsID << " (" << snp.gene << ") – " << snp.function << std::endl;
     }
+    std::cout << "---------------------------" << std::endl;
 }
+

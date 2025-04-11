@@ -6,6 +6,7 @@
 #include "SNP.h"
 #include "Genome.h"
 #include "Disease.h"
+#include "Analyzer.h"
 
 /** 
  * Beispiel Datei, Ancestry Sequencing:
@@ -20,6 +21,11 @@
  * rs6681049	1	800007	C	C
  * ......
  * mehrere 100.000 Einträge pro Sequencing einer Person -> wird in Genome gespeichert 
+ * 
+ * Dieses Tool ist kein diagnostisches Instrument, 
+ * sondern dient der explorativen Identifikation von potenziell relevanten SNPs in einer genetischen Datei, 
+ * basierend auf frei definierbaren Risiko-SNP-Listen, 
+ * dient also eher zur Anschauung und zu Gunsten der Umsetzbarkeit in Bezug auf dieses Projekt
 */
 
 /**
@@ -76,9 +82,21 @@ int main() {
             std::cout << snp.rsID << " → " << snp.function << std::endl;
         }*/
         cancer.printRiskSNPs();
+
+        Disease mcas("MCAS");
+        mcas.loadRiskSNPsFromFile("data/disease/MCAS_snps.tsv");
         
 
         // Schritt 3: Analyse starten
+        Analyzer try_1;
+        try_1.runAnalysis(genome,cancer);
+        try_1.printSummary();
+
+        Analyzer try_2;
+        try_2.runAnalysis(genome,mcas);
+        try_2.printSummary();
+        try_2.saveResults("data/output/results_demo.txt");
+
 
         return 0;
     }

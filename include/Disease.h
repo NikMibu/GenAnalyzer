@@ -19,11 +19,6 @@
  * 
  */
 
-enum class RiskLevel {
-    Low,
-    Medium,
-    High
-};
 
 class DiseaseSNP {
     public:
@@ -37,17 +32,17 @@ class DiseaseSNP {
 
 
 class Disease {
-    private:
-        std::string name;
-        std::vector<DiseaseSNP> riskSNPs;
     
     public:
         Disease(const std::string& name);
-    
         void loadRiskSNPsFromFile(const std::string& filename);
         const std::string& getName() const;
         const std::vector<DiseaseSNP>& getRiskSNPs() const;
     
         void printRiskSNPs() const;
+
+    private:
+        std::string name;
+        std::vector<DiseaseSNP> riskSNPs;
 };
 
