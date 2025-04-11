@@ -1,7 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <filesystem>
 
-#include "../include/SNP.h"
+
+#include "SNP.h"
+#include "Genome.h"
 
 /** 
  * Beispiel Datei, Ancestry Sequencing:
@@ -35,13 +38,39 @@ int main() {
         std::cout << "🧬 Willkommen bei GenAnalyzer!" << std::endl;
 
         // Tests:
+        /*  - Simple Tests von SNP und Genome Klasse
         SNP snp("rs123456", "1", 123456, 'T', 'A');
         std::cout << "Genotype: " << snp.getGenotype() << ", Status: " << genotypeStatusToString(snp.getGenotypeStatus()) << std::endl;
 
+        Genome genome("TestSample");
+        SNP snp1("rs123", "1", 123456, 'A', 'G');
+        genome.addSNP(snp1);
+        genome.addSNP(snp);
+
+        const SNP* found = genome.getSNPByID("rs123");
+        if (found) {
+            std::cout << "✅ SNP gefunden: " << found->getRSID() << ", Genotyp: " << found->getGenotype() << std::endl;
+        }
+        std::cout << genome.getSNPCount() << genome.getSampleID() << genome.hasSNP("rs1235")<<std::endl;
+        genome.printSummary();
+        */
 
         // Schritt 1: Genome einlesen
+        Genome genome("DemoSample");
+        genome.loadFromFile("data/seqs/AncestryDNA.txt");
+        std::cout << "Geladene SNPs: " << genome.getSNPCount() << std::endl;
+
+        // Nach SNP mir rsID suchen 
+        const SNP* found = genome.getSNPByID("rs7015180");
+        if (found) {
+            std::cout << "Gefunden: " << found->getRSID() << ", Genotyp: " << found->getGenotype() << ", Genotype Status: " << genotypeStatusToString(found->getGenotypeStatus())<<std::endl;
+        }
+        genome.printSummary();
+
         // Schritt 2: Disease-Liste einlesen
+
         // Schritt 3: Analyse starten
+
         return 0;
     }
     catch(const std::exception& e)

@@ -36,13 +36,15 @@ enum class GenotypeStatus {
     // no unknown SNPs and no cloning of SNP
     public:
         SNP() = delete;                                   // default constructor
-        SNP(const SNP &i_rhs) = delete;                   // copy constructor
+        SNP(const SNP &i_rhs) = default;                   // copy constructor
         SNP &operator=(const SNP &i_rhs) = delete;        // assignment operator
 
     //Getter & Setter
     public:
         std::string getGenotype() const;
         GenotypeStatus getGenotypeStatus() const;
+        std::string getRSID() const;
+
 
     private:
         std::string m_rsID;

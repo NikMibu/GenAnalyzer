@@ -35,3 +35,9 @@ std::string genotypeStatusToString(GenotypeStatus status) {
             return "Unknown";
     }
 }
+
+// In SNP.cpp
+std::string SNP::getRSID() const {
+    return m_rsID;
+}
+
