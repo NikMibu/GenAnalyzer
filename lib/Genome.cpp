@@ -98,4 +98,5 @@ void Genome::printSummary() const{
     std::cout << "---------Summary---------" << std::endl;
     std::cout << "SampleID: " << getSampleID() << std::endl;
     std::cout << "SNPCount: " << getSNPCount() << std::endl;
+    std::cout << "-------------------------" << std::endl;
 }

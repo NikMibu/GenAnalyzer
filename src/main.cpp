@@ -5,6 +5,7 @@
 
 #include "SNP.h"
 #include "Genome.h"
+#include "Disease.h"
 
 /** 
  * Beispiel Datei, Ancestry Sequencing:
@@ -68,6 +69,14 @@ int main() {
         genome.printSummary();
 
         // Schritt 2: Disease-Liste einlesen
+        Disease cancer("Cancer");
+        cancer.loadRiskSNPsFromFile("data/disease/CancerGenes_snps.tsv");
+
+        /*for (const auto& snp : cancer.getRiskSNPs()) {
+            std::cout << snp.rsID << " → " << snp.function << std::endl;
+        }*/
+        cancer.printRiskSNPs();
+        
 
         // Schritt 3: Analyse starten
 

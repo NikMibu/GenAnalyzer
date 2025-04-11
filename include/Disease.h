@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include <vector>
 
 /**
  * Enthält die krankheitsrelevant SNPs + Risiko-Genotypen
@@ -11,6 +13,7 @@
  * - bool isAtRisk(const Genome& genome) const
  * 
  * Unterklassen für jede Krankheit -> in eigene Dateien z.b. CancerDisease.h / CancerDisease.cpp
+ * Baer erst später
  * - class CancerDisease : public Disease {}
  * - class MCASDisease : public Disease {}
  * 
@@ -22,9 +25,29 @@ enum class RiskLevel {
     High
 };
 
+class DiseaseSNP {
+    public:
+        std::string rsID;
+        std::string gene;
+        std::string function;
+    
+        DiseaseSNP(const std::string& rs, const std::string& g, const std::string& f)
+            : rsID(rs), gene(g), function(f) {}
+};
 
- class Disease
- {
 
- };
+class Disease {
+    private:
+        std::string name;
+        std::vector<DiseaseSNP> riskSNPs;
+    
+    public:
+        Disease(const std::string& name);
+    
+        void loadRiskSNPsFromFile(const std::string& filename);
+        const std::string& getName() const;
+        const std::vector<DiseaseSNP>& getRiskSNPs() const;
+    
+        void printRiskSNPs() const;
+};
 
