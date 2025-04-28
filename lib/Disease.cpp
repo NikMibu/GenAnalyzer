@@ -6,6 +6,7 @@
 
 Disease::Disease(const std::string& name) : name(name) {}
 
+//Lesen und Erstellen einer Krankheit von einer Datei aus
 void Disease::loadRiskSNPsFromFile(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {

@@ -12,8 +12,8 @@
  * Funktionen: 
  * - bool isAtRisk(const Genome& genome) const
  * 
+ * Mögliche Erweiterung:
  * Unterklassen für jede Krankheit -> in eigene Dateien z.b. CancerDisease.h / CancerDisease.cpp
- * Baer erst später
  * - class CancerDisease : public Disease {}
  * - class MCASDisease : public Disease {}
  * 
@@ -35,12 +35,15 @@ class Disease {
     
     public:
         Disease(const std::string& name);
-        void loadRiskSNPsFromFile(const std::string& filename);
+
+        //Getter
         const std::string& getName() const;
         const std::vector<DiseaseSNP>& getRiskSNPs() const;
     
+        void loadRiskSNPsFromFile(const std::string& filename);
         void printRiskSNPs() const;
 
+    // Member Variablen
     private:
         std::string name;
         std::vector<DiseaseSNP> riskSNPs;

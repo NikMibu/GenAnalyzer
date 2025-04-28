@@ -33,6 +33,7 @@
 
         void printSummary() const;
     
+    //Member Variablen
     private:
         std::vector<SNP> m_snps;
         std::map<std::string, size_t> m_indexByID;

@@ -80,6 +80,7 @@ const SNP* Genome::getSNPByID(const std::string& rsID) const {
     return nullptr; // SNP nicht gefunden
 }
 
+// Hinzufügen von SNPs zu Genom
 void Genome::addSNP(const SNP& snp) {
     m_snps.push_back(snp);
 }
@@ -89,7 +90,7 @@ bool Genome::hasSNP(const std::string& rsID) const {
     return getSNPByID(rsID) != nullptr;
 }
 
-
+// Return Anzahl der SNPs im Genom 
 size_t Genome::getSNPCount() const {
     return m_snps.size();
 }

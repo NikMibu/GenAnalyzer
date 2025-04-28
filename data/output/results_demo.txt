@@ -1,17 +1,21 @@
+Analysis Date: Mon Apr 28 20:41:55 2025
+----------------------------------------
 SampleID: DemoSample
 SNPCount: 677436
 Disease: MCAS
 Treffer: 10
 Risiko-Score: 12 (Hoch)
 ----------------------------------------
-rs10156191	TC	Heterozygous	DAO	Histaminabbau (Darm)
-rs2052129	TG	Heterozygous	DAO	Histaminabbau (Darm)
-rs11558538	CC	Homozygous Recessive	HNMT	Histaminabbau (intrazellulär)
-rs2243250	CC	Homozygous Recessive	IL4	Zytokin / IgE-Steuerung
-rs2251746	TC	Heterozygous	FCER1A	IgE-Rezeptor / Allergieneigung
-rs4680	AA	Homozygous Dominant	COMT	Neurotransmitter / Stressverarbeitung
-rs6323	TT	Homozygous Recessive	MAO-A	Monoaminoxidase / Reizverarbeitung
-rs1695	AG	Heterozygous	GSTP1	Entgiftung / Phase II
-rs4880	AG	Heterozygous	SOD2	Mitochondrien / Superoxid
-rs1801133	AG	Heterozygous	MTHFR	Methylierung / Homocystein
-----------------------------------------
+rsID        Genotyp   Status                   Gen       Funktion
+----------------------------------------------------------------------------
+rs10156191  TC        Heterozygous             DAO       Histaminabbau (Darm)
+rs2052129   TG        Heterozygous             DAO       Histaminabbau (Darm)
+rs11558538  CC        Homozygous Recessive     HNMT      Histaminabbau (intrazellulär)
+rs2243250   CC        Homozygous Recessive     IL4       Zytokin / IgE-Steuerung
+rs2251746   TC        Heterozygous             FCER1A    IgE-Rezeptor / Allergieneigung
+rs4680      AA        Homozygous Dominant      COMT      Neurotransmitter / Stressverarbeitung
+rs6323      TT        Homozygous Recessive     MAO-A     Monoaminoxidase / Reizverarbeitung
+rs1695      AG        Heterozygous             GSTP1     Entgiftung / Phase II
+rs4880      AG        Heterozygous             SOD2      Mitochondrien / Superoxid
+rs1801133   AG        Heterozygous             MTHFR     Methylierung / Homocystein
+----------------------------------------------------------------------------

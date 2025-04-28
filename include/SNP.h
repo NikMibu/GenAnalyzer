@@ -19,6 +19,7 @@
  * - std::string getGenotype -> z.b. "AG"
  */
 
+//Enum class for assignment of Genotype Status
 enum class GenotypeStatus {
     HomozygousDominant,
     Heterozygous,
@@ -28,7 +29,7 @@ enum class GenotypeStatus {
 
  class SNP
  {
-    //Konstruktor & Destructor
+    //Konstruktor & Destruktor
     public:
         SNP(const std::string& id, const std::string& chr, int pos, char a1, char a2);
         ~SNP() = default;  
@@ -45,7 +46,7 @@ enum class GenotypeStatus {
         GenotypeStatus getGenotypeStatus() const;
         std::string getRSID() const;
 
-
+    //Member Variablen
     private:
         std::string m_rsID;
         std::string m_chromosome;
@@ -53,5 +54,5 @@ enum class GenotypeStatus {
         char m_allele1;
         char m_allele2;
  };
-
+    // Prototyp einer otside Class Function
  std::string genotypeStatusToString(GenotypeStatus status);

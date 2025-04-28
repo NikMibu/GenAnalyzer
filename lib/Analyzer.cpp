@@ -4,22 +4,29 @@
 #include <sstream>
 #include <exception>
 #include <filesystem>
+#include <ctime>
+#include <iomanip>  // Wichtig für std::setw -> Formatieren des Reports
 
 #include "Genome.h"
 #include "SNP.h"
 #include "Disease.h"
 #include "Analyzer.h"
 
+// Analysiert ein Genome auf Risiko-SNPs
 void Analyzer::runAnalysis(const Genome& genome, const Disease& disease){
+    // Speichern der übergebenen Genome- und Disease-Objekte als Zeiger
+    // -> Ermöglicht späteren Zugriff in anderen Methoden wie saveResults() und printSummary()
     this->genome = &genome;
     this->disease = &disease;
+
     for (size_t i = 0; i < disease.getRiskSNPs().size(); i++) {
-        const auto& riskSNP = disease.getRiskSNPs()[i];
+        const auto& riskSNP = disease.getRiskSNPs()[i]; // aktueller RisikoSNP
     
+        // überprüft ob dieses RisikoSNP in Genom enthalten ist 
         if (genome.hasSNP(riskSNP.rsID)) {
             const SNP* snp = genome.getSNPByID(riskSNP.rsID);
     
-            // z.B. speichern:
+            // speichern in matchedSNPS & matchedDiseaseSNP
             matchedSNPs.push_back(snp);
             matchedDiseaseSNPs.push_back(riskSNP);
         }
@@ -27,6 +34,8 @@ void Analyzer::runAnalysis(const Genome& genome, const Disease& disease){
     
 }
 
+// Stochastische Berechnung des Risikos des in Genom enthaltener Disease RisikoSNPs - matchedSNPs
+// soll nur eine Anwendung darstellen und keine richtig validierte Risiko Analyse
 int Analyzer::calculateRiskScore() const {
     int score = 0;
     for (const SNP* snp : matchedSNPs) {
@@ -38,6 +47,7 @@ int Analyzer::calculateRiskScore() const {
     }
     return score;
 }
+// Zuweisen des berechneten Risk Scores zu Risk Level
 RiskLevel Analyzer::getRiskLevel(int score) const {
     if (score <= 3)
         return RiskLevel::Low;
@@ -46,6 +56,7 @@ RiskLevel Analyzer::getRiskLevel(int score) const {
     else
         return RiskLevel::High;
 }
+// Konvertiert das Risk Level zu einem String 
 std::string Analyzer::riskLevelToString(RiskLevel level) {
     switch (level) {
         case RiskLevel::Low: return "Gering";
@@ -55,6 +66,7 @@ std::string Analyzer::riskLevelToString(RiskLevel level) {
     }
 }
 
+// interne Summary Ausgabe
 void Analyzer::printSummary() const{
     int score = calculateRiskScore();
     RiskLevel level = getRiskLevel(score);
@@ -75,17 +87,27 @@ void Analyzer::printSummary() const{
     std::cout << "---------------------------" << std::endl;
 }
 
+// Schreiben einer Analyse-Zusammenfassung
 void Analyzer::saveResults(const std::string& filename) const {
-    std::filesystem::create_directories("data/output"); // Ordner anlegen
+    if (!genome || !disease) {
+        throw std::runtime_error("Analyzer wurde nicht richtig initialisiert");
+    }
+
+    std::filesystem::create_directories("data/output");
 
     std::ofstream out(filename);
     if (!out.is_open()) {
-        throw std::runtime_error(" Datei konnte nicht geschrieben werden: " + filename);
+        throw std::runtime_error("Datei konnte nicht geschrieben werden: " + filename);
     }
 
     int score = calculateRiskScore();
     RiskLevel level = getRiskLevel(score);
 
+    time_t now = time(0);
+    char* dt = ctime(&now);
+
+    out << "Analysis Date: " << dt;
+    out << "----------------------------------------\n";
     out << "SampleID: " << genome->getSampleID() << "\n";
     out << "SNPCount: " << genome->getSNPCount() << "\n";
     out << "Disease: " << disease->getName() << "\n";
@@ -93,17 +115,30 @@ void Analyzer::saveResults(const std::string& filename) const {
     out << "Risiko-Score: " << score << " (" << riskLevelToString(level) << ")\n";
     out << "----------------------------------------\n";
 
+    // Header
+    // std::left, std::setw -> zum formatieren der Datei
+    out << std::left;
+    out << std::setw(12) << "rsID"
+        << std::setw(10) << "Genotyp"
+        << std::setw(25) << "Status"
+        << std::setw(10) << "Gen"
+        << "Funktion" << "\n";
+    out << "----------------------------------------------------------------------------\n";
+
+    // Inhalt
     for (size_t i = 0; i < matchedSNPs.size(); ++i) {
         const SNP* snp = matchedSNPs[i];
         const DiseaseSNP& info = matchedDiseaseSNPs[i];
-        out << snp->getRSID() << "\t"
-            << snp->getGenotype() << "\t"
-            << genotypeStatusToString(snp->getGenotypeStatus()) << "\t"
-            << info.gene << "\t"
+        out << std::setw(12) << snp->getRSID()
+            << std::setw(10) << snp->getGenotype()
+            << std::setw(25) << genotypeStatusToString(snp->getGenotypeStatus())
+            << std::setw(10) << info.gene
             << info.function << "\n";
     }
 
-    out << "----------------------------------------\n";
+    out << "----------------------------------------------------------------------------\n";
     out.close();
 }
+
+
 
