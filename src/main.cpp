@@ -51,11 +51,8 @@
  * Anschließend kann der Nutzer die Ergebnisse anzeigen oder speichern.
  * 
  * In dieser Demo-Version sind Genome-Datei und Krankheit vordefiniert, bzw. kann ausgewählt werden, MCAS - default 
- * -> Momentan kann man noch nicht mehrere Krankheiten auf ein mal Analysieren 
- * Erweiterungsideen wären z. B.:
- * - Benutzerdefinierte Auswahl verschiedener Krankheiten
- * - Eingabe von Patientenprofilen (Alter, BMI, etc.)
- * - Mehrere Benutzer / Proben / Krankheiten gleichzeitig
+ * -> Momentan kann man noch nicht mehrere Krankheiten auf ein mal Analysieren oder die Analyse von vorne starten 
+ * 
  **/
 
 
@@ -125,10 +122,12 @@ int main() {
                 case 4:
                     analyzer.printSummary();
                     break;
-                case 5:
-                    analyzer.saveResults("data/output/menu_results.txt");
-                    std::cout << "💾 Ergebnisse gespeichert unter: data/output/menu_results.txt" << std::endl;
+                case 5:{
+                    std::string filename = "data/output/" + genome.getSampleID() + "_" + disease.getName() + "_results.txt";
+                    analyzer.saveResults(filename);
+                    std::cout << "💾 Ergebnisse gespeichert unter: " << filename << std::endl;
                     break;
+                }
                 case 6:
                     running = false;
                     std::cout << "Programm beendet. Vielen Dank fürs Nutzen von GenAnalyzer." << std::endl;
