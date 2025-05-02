@@ -34,11 +34,11 @@ void Disease::loadRiskSNPsFromFile(const std::string& filename) {
 const std::string& Disease::getName() const {
     return name;
 }
-
+//Gibt die RisikoSNPs der Krankheit aus
 const std::vector<DiseaseSNP>& Disease::getRiskSNPs() const {
     return riskSNPs;
 }
-
+// Erstellt eine Übersicht über diese RiskSNPs der Krankheit
 void Disease::printRiskSNPs() const {
     std::cout << "---------------------------"<< std::endl;
     std::cout << "RiskSNPs of Disease: " << getName() << std::endl;

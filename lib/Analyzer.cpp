@@ -5,37 +5,30 @@
 #include <exception>
 #include <filesystem>
 #include <ctime>
-#include <iomanip>  // Wichtig für std::setw -> Formatieren des Reports
+#include <iomanip>  // Für std::setw → Formatieren des Reports
 
 #include "Genome.h"
 #include "SNP.h"
 #include "Disease.h"
 #include "Analyzer.h"
 
-// Analysiert ein Genome auf Risiko-SNPs
-void Analyzer::runAnalysis(const Genome& genome, const Disease& disease){
-    // Speichern der übergebenen Genome- und Disease-Objekte als Zeiger
-    // -> Ermöglicht späteren Zugriff in anderen Methoden wie saveResults() und printSummary()
+// Führt die Analyse eines Genoms auf risikoassoziierte SNPs durch
+void Analyzer::runAnalysis(const Genome& genome, const Disease& disease) {
     this->genome = &genome;
     this->disease = &disease;
 
-    for (size_t i = 0; i < disease.getRiskSNPs().size(); i++) {
-        const auto& riskSNP = disease.getRiskSNPs()[i]; // aktueller RisikoSNP
-    
-        // überprüft ob dieses RisikoSNP in Genom enthalten ist 
+    // Vergleicht jedes Risk-SNP mit dem geladenen Genom
+    for (const auto& riskSNP : disease.getRiskSNPs()) {
         if (genome.hasSNP(riskSNP.rsID)) {
             const SNP* snp = genome.getSNPByID(riskSNP.rsID);
-    
-            // speichern in matchedSNPS & matchedDiseaseSNP
             matchedSNPs.push_back(snp);
             matchedDiseaseSNPs.push_back(riskSNP);
         }
     }
-    
 }
 
-// Stochastische Berechnung des Risikos des in Genom enthaltener Disease RisikoSNPs - matchedSNPs
-// soll nur eine Anwendung darstellen und keine richtig validierte Risiko Analyse
+// Berechnet den Risiko-Score nach einfacher Heuristik
+// Heterozygot = 1 Punkt, Homozygot rezessiv = 2 Punkte
 int Analyzer::calculateRiskScore() const {
     int score = 0;
     for (const SNP* snp : matchedSNPs) {
@@ -47,7 +40,8 @@ int Analyzer::calculateRiskScore() const {
     }
     return score;
 }
-// Zuweisen des berechneten Risk Scores zu Risk Level
+
+// Weist einem numerischen Score ein RiskLevel zu
 RiskLevel Analyzer::getRiskLevel(int score) const {
     if (score <= 3)
         return RiskLevel::Low;
@@ -56,7 +50,8 @@ RiskLevel Analyzer::getRiskLevel(int score) const {
     else
         return RiskLevel::High;
 }
-// Konvertiert das Risk Level zu einem String 
+
+// Gibt einen lesbaren String zum RiskLevel zurück
 std::string Analyzer::riskLevelToString(RiskLevel level) {
     switch (level) {
         case RiskLevel::Low: return "Gering";
@@ -66,28 +61,30 @@ std::string Analyzer::riskLevelToString(RiskLevel level) {
     }
 }
 
-// interne Summary Ausgabe
-void Analyzer::printSummary() const{
+// Gibt alle Treffer + Risk-Score im Terminal aus
+void Analyzer::printSummary() const {
     int score = calculateRiskScore();
     RiskLevel level = getRiskLevel(score);
 
     std::cout << "---------------------------" << std::endl;
-    std::cout << "Found Risk Snps in Genome of :"<< genome->getSampleID() << std::endl;
+    std::cout << "Gefundene Risiko-SNPs für: " << genome->getSampleID() << "\n\n";
+
     for (size_t i = 0; i < matchedSNPs.size(); i++) {
         const SNP* snp = matchedSNPs[i];
         const DiseaseSNP& info = matchedDiseaseSNPs[i];
 
         std::cout << snp->getRSID() << "\t"
-                << snp->getGenotype() << "\t"
-                << genotypeStatusToString(snp->getGenotypeStatus()) << "\t"
-                << info.gene << "\t"
-                << info.function << std::endl;
+                  << snp->getGenotype() << "\t"
+                  << genotypeStatusToString(snp->getGenotypeStatus()) << "\t"
+                  << info.gene << "\t"
+                  << info.function << std::endl;
     }
-    std::cout << "Risiko-Score: " << score << " → "<< riskLevelToString(level) << std::endl;
+
+    std::cout << "\nRisiko-Score: " << score << " → " << riskLevelToString(level) << std::endl;
     std::cout << "---------------------------" << std::endl;
 }
 
-// Schreiben einer Analyse-Zusammenfassung
+// Schreibt die Analyseergebnisse in eine Datei (z. B. für Dokumentation)
 void Analyzer::saveResults(const std::string& filename) const {
     if (!genome || !disease) {
         throw std::runtime_error("Analyzer wurde nicht richtig initialisiert");
@@ -115,8 +112,7 @@ void Analyzer::saveResults(const std::string& filename) const {
     out << "Risiko-Score: " << score << " (" << riskLevelToString(level) << ")\n";
     out << "----------------------------------------\n";
 
-    // Header
-    // std::left, std::setw -> zum formatieren der Datei
+    // Tabellenheader
     out << std::left;
     out << std::setw(12) << "rsID"
         << std::setw(10) << "Genotyp"
@@ -125,7 +121,7 @@ void Analyzer::saveResults(const std::string& filename) const {
         << "Funktion" << "\n";
     out << "----------------------------------------------------------------------------\n";
 
-    // Inhalt
+    // Trefferzeilen
     for (size_t i = 0; i < matchedSNPs.size(); ++i) {
         const SNP* snp = matchedSNPs[i];
         const DiseaseSNP& info = matchedDiseaseSNPs[i];
@@ -139,6 +135,3 @@ void Analyzer::saveResults(const std::string& filename) const {
     out << "----------------------------------------------------------------------------\n";
     out.close();
 }
-
-
-

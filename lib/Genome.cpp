@@ -61,11 +61,11 @@ void Genome::loadFromFile(const std::string& filename, size_t maxLines) {
 Genome::Genome(const std::string& sampleID)
     : m_sampleID(sampleID)
 {}
+
 // Sample Functions:
 void Genome::setSampleID(const std::string& id) {
     m_sampleID = id;
 }
-
 std::string Genome::getSampleID() const {
     return m_sampleID;
 }
@@ -95,6 +95,7 @@ size_t Genome::getSNPCount() const {
     return m_snps.size();
 }
 
+// Gibt eine Summary des eingelesenen Genoms aus
 void Genome::printSummary() const{
     std::cout << "---------Summary---------" << std::endl;
     std::cout << "SampleID: " << getSampleID() << std::endl;

@@ -2,50 +2,63 @@
 #include "Genome.h"
 #include "Disease.h"
 
+#pragma once
+
+#include "Genome.h"
+#include "Disease.h"
+
 /**
- * Macht die eigentliche Analyse
- * Klassifizierung ist eine vereinfachte Heuristik, keine medizinisch validierte Bewertung
- * Es fehlen populationsbezogene Risikoquoten, Validierungsstudien, statistische Wahrscheinlichkeiten.
- * 
- * Attribute:
- * - Genome genome
- * - std::vector<Disease> disease
- * - std::vector<std::string> detectedRisks
- * 
- * Funktionen:
- * - void runAnalysis()
- * - void saveResults(const std::string& filename) // writeToFile()
- * - void printSummary()
- * maybe:
- * - calculateRiskScore() Heterozygot = 1 Punkt, Homozygot = 2 Punkte, Summe aller Treffer = Score
- * - analyzeMultipleDiseases()
- * - groupResultsByGene()
- * - highlightCriticalGenotypes()
- * 
- * 
- * Persistierung:
- * - void Analyzer::writeResultsToFile(const std::string& filename, const Genome& genome, const std::vector<DiseaseSNP>& results);
- * - void load 
+ * Die Klasse Analyzer führt die Analyse eines genetischen Profils (Genome)
+ * im Vergleich zu einer Krankheitsbeschreibung (Disease) durch.
+ *
+ * Hinweis:
+ * Die Klassifizierung basiert auf einer einfachen Heuristik und stellt keine medizinische Bewertung dar.
+ * Es fehlen populationsbezogene Referenzdaten, statistische Validierung und klinische Aussagekraft.
+ *
+ * Hauptfunktionen:
+ * - Analyse eines Genoms in Bezug auf eine Krankheit
+ * - Ausgabe und Speicherung der Treffer
+ * - Berechnung eines einfachen Risiko-Scores
+ * - Risiko-Einstufung (Low / Medium / High)
+ *
+ * Mögliche Erweiterungen:
+ * - Analyse mehrerer Krankheiten in einer Session
+ * - Gruppierung nach Genen
+ * - Hervorhebung besonders kritischer SNPs
  */
+
+// Einfache Einteilung des genetischen Risikos basierend auf dem Score
 enum class RiskLevel {
     Low,
     Medium,
     High
 };
 
+class Analyzer {
+public:
+    // Startet die Analyse eines Genoms im Vergleich zur Disease-SNP-Liste
+    void runAnalysis(const Genome& genome, const Disease& disease);
 
- class Analyzer {
-    public:
-        void runAnalysis(const Genome& genome, const Disease& disease);         // macht alles
-        void saveResults(const std::string& filename) const;                    // speichert Treffer
-        void printSummary() const;                                              // zeigt Treffer
-        int calculateRiskScore() const;                                         // gibt Score zurück
-        RiskLevel getRiskLevel(int score) const;
-        static std::string riskLevelToString(RiskLevel level);
-    
-    private:
-        const Genome* genome = nullptr;  
-        const Disease* disease = nullptr;  
-        std::vector<const SNP*> matchedSNPs;        // Zeiger auf gefundene SNPs im Genome
-        std::vector<DiseaseSNP> matchedDiseaseSNPs; // zugehörige Infos aus Disease
+    // Speichert die Analyseergebnisse in eine Textdatei
+    void saveResults(const std::string& filename) const;
+
+    // Gibt eine Zusammenfassung aller Treffer im Terminal aus
+    void printSummary() const;
+
+    // Berechnet einen einfachen Score (z. B. 1 Punkt für heterozygot, 2 für homozygot)
+    int calculateRiskScore() const;
+
+    // Wandelt einen numerischen Score in eine Risiko-Einstufung um
+    RiskLevel getRiskLevel(int score) const;
+
+    // Gibt den Risiko-Level als String zurück
+    static std::string riskLevelToString(RiskLevel level);
+
+private:
+    const Genome* genome = nullptr;                // Referenz auf das untersuchte Genom
+    const Disease* disease = nullptr;              // Referenz auf die betrachtete Krankheit
+
+    std::vector<const SNP*> matchedSNPs;           // Liste gefundener SNPs im Genom
+    std::vector<DiseaseSNP> matchedDiseaseSNPs;    // Zuordnung zu Risiko-SNPs aus Disease
 };
+

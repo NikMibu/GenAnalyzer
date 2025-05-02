@@ -2,107 +2,146 @@
 #include <vector>
 #include <filesystem>
 
-
 #include "SNP.h"
 #include "Genome.h"
 #include "Disease.h"
 #include "Analyzer.h"
 
-/** 
- * Beispiel Datei, Ancestry Sequencing:
- * 
- * rsid chromosome	position allele1 allele2
- * rs3131972	1	752721	A	G
- * rs114525117	1	759036	G	G
- * rs4040617	1	779322	A	G
- * rs141175086	1	780397	C	C
- * rs115093905	1	787173	T	G
- * rs11240777	1	798959	A	G
- * rs6681049	1	800007	C	C
- * ......
- * mehrere 100.000 Einträge pro Sequencing einer Person -> wird in Genome gespeichert 
- * 
- * Dieses Tool ist kein diagnostisches Instrument, 
- * sondern dient der explorativen Identifikation von potenziell relevanten SNPs in einer genetischen Datei, 
- * basierend auf frei definierbaren Risiko-SNP-Listen, 
- * dient also eher zur Anschauung und zu Gunsten der Umsetzbarkeit in Bezug auf dieses Projekt
-*/
-
 /**
- * To-Do:
- * - kleines Text / Terminal basiertes UI
- * - verschiedene Error Handlings
- * - Genome einlesen 
- * - Disease einlesen
- * - Analyzer
- * - Output : Histogramm of Risk associated to that disease bacause of that SNPs and Genotypes 
+ * GenAnalyzer – Hauptprogramm
+ * 
+ * Dieses Tool dient der explorativen Analyse genetischer Rohdaten (z. B. aus AncestryDNA),
+ * um auffällige SNPs in Bezug auf definierte Krankheitsprofile zu identifizieren.
+ * Die Auswertung basiert auf Risiko-SNP-Tabellen und ist nicht medizinisch validiert.
+ *
+ * ──────────────────────────────────────────────────────────────
+ * Beispielstruktur einer AncestryDNA-Rohdatei:
+ * (Tabulatorgetrennte Datei mit sehr vielen Zeilen)
+ * 
+ * rsid          chromosome   position   allele1   allele2
+ * rs3131972     1            752721     A         G
+ * rs11240777    1            798959     A         G
+ * rs1801133     1            11856378   A         G
+ * ...
+ *
+ * → Die Datei enthält typischerweise mehrere hunderttausend SNPs.
+ * → GenAnalyzer extrahiert und prüft davon nur diejenigen, die als risikorelevant definiert wurden.
+ * ──────────────────────────────────────────────────────────────
  */
+
+ /**
+ * To-Do:
+ * ✔ Fehlerbehandlung
+ * ✔ Objektstruktur mit Klassen
+ * ✔ Genome-Import
+ * ✔ Disease-Liste importieren
+ * ✔ Analysefunktion (v1)
+ *
+ * Geplante Erweiterungen:
+ * ⭕ Erweiterung des Genome-Modells mit Personendaten (Alter, BMI, Lebensstil)
+ * ⭕ RiskAnalyzer v2: gewichtete Risikoallele, bessere Visualisierung
+ * ⭕ Terminal-UI mit Menüführung
+ */
+
+/** Erklärung zum UI-Teil:
+ * Dieses Menü stellt eine einfache, terminalbasierte Benutzeroberfläche dar,
+ * mit der der Nutzer die Analyse-Schritte manuell ausführen kann.
+ * Der Workflow folgt einer typischen Pipeline:
+ * [1] SNP-Daten einlesen → [2] Krankheits-SNPs laden → [3] Analyse durchführen
+ * Anschließend kann der Nutzer die Ergebnisse anzeigen oder speichern.
+ * 
+ * In dieser Demo-Version sind Genome-Datei und Krankheit vordefiniert, bzw. kann ausgewählt werden, MCAS - default 
+ * -> Momentan kann man noch nicht mehrere Krankheiten auf ein mal Analysieren 
+ * Erweiterungsideen wären z. B.:
+ * - Benutzerdefinierte Auswahl verschiedener Krankheiten
+ * - Eingabe von Patientenprofilen (Alter, BMI, etc.)
+ * - Mehrere Benutzer / Proben / Krankheiten gleichzeitig
+ **/
 
 
 int main() {
-    try
-    {
+    try {
         std::cout << "🧬 Willkommen bei GenAnalyzer!" << std::endl;
 
-        // Tests:
-        /*  - Simple Tests von SNP und Genome Klasse
-        SNP snp("rs123456", "1", 123456, 'T', 'A');
-        std::cout << "Genotype: " << snp.getGenotype() << ", Status: " << genotypeStatusToString(snp.getGenotypeStatus()) << std::endl;
-
-        Genome genome("TestSample");
-        SNP snp1("rs123", "1", 123456, 'A', 'G');
-        genome.addSNP(snp1);
-        genome.addSNP(snp);
-
-        const SNP* found = genome.getSNPByID("rs123");
-        if (found) {
-            std::cout << "✅ SNP gefunden: " << found->getRSID() << ", Genotyp: " << found->getGenotype() << std::endl;
-        }
-        std::cout << genome.getSNPCount() << genome.getSampleID() << genome.hasSNP("rs1235")<<std::endl;
-        genome.printSummary();
-        */
-
-        // Schritt 1: Genome einlesen
         Genome genome("DemoSample");
-        genome.loadFromFile("data/seqs/AncestryDNA.txt");
-        std::cout << "Geladene SNPs: " << genome.getSNPCount() << std::endl;
+        Disease disease("MCAS"); 
+        Analyzer analyzer;
 
-        // Nach SNP mir rsID suchen 
-        const SNP* found = genome.getSNPByID("rs7015180");
-        if (found) {
-            std::cout << "Gefunden: " << found->getRSID() << ", Genotyp: " << found->getGenotype() << ", Genotype Status: " << genotypeStatusToString(found->getGenotypeStatus())<<std::endl;
+        bool running = true;
+        while (running) {
+            std::cout << "\n===== Menü =====\n";
+            std::cout << "[1] Genome-Datei laden\n";
+            std::cout << "[2] Krankheit laden \n";
+            std::cout << "[3] Analyse starten\n";
+            std::cout << "[4] Ergebnisse anzeigen\n";
+            std::cout << "[5] Ergebnisse speichern\n";
+            std::cout << "[6] Beenden\n";
+            std::cout << "Eingabe: ";
+
+            int choice;
+            std::cin >> choice;
+
+            switch (choice) {
+                case 1:
+                    genome.loadFromFile("data/seqs/AncestryDNA.txt");
+                    std::cout << "✅ SNPs geladen: " << genome.getSNPCount() << std::endl;
+                    break;
+                case 2: {
+                    std::cout << "\nWelche Krankheit möchtest du laden?\n";
+                    std::cout << "[1] MCAS\n";
+                    std::cout << "[2] Cancer\n";
+                    std::cout << "[3] Gilbert-Syndrom\n";
+                    std::cout << "Eingabe: ";
+                        
+                    int diseaseChoice;
+                    std::cin >> diseaseChoice;
+                    
+                    switch (diseaseChoice) {
+                        case 1:
+                            disease = Disease("MCAS");
+                            disease.loadRiskSNPsFromFile("data/disease/MCAS_snps.tsv");
+                            break;
+                        case 2:
+                            disease = Disease("Cancer");
+                            disease.loadRiskSNPsFromFile("data/disease/CancerGenes_snps.tsv");
+                            break;
+                        case 3:
+                            disease = Disease("Gilbert-Syndrom");
+                            disease.loadRiskSNPsFromFile("data/disease/Gilbert_Syndrom_snps.tsv");
+                            break;
+                        default:
+                            std::cout << "⚠ Ungültige Auswahl – bitte 1–3 eingeben." << std::endl;
+                            break;
+                    }
+                    
+                    std::cout << "✅ " << disease.getName() << "-Risiko-SNPs geladen: "
+                                << disease.getRiskSNPs().size() << std::endl;
+                    break;
+                }
+                case 3:
+                    analyzer.runAnalysis(genome, disease);
+                    std::cout << "🔬 Analyse abgeschlossen." << std::endl;
+                    break;
+                case 4:
+                    analyzer.printSummary();
+                    break;
+                case 5:
+                    analyzer.saveResults("data/output/menu_results.txt");
+                    std::cout << "💾 Ergebnisse gespeichert unter: data/output/menu_results.txt" << std::endl;
+                    break;
+                case 6:
+                    running = false;
+                    std::cout << "Programm beendet. Vielen Dank fürs Nutzen von GenAnalyzer." << std::endl;
+                    break;
+                default:
+                    std::cout << "⚠ Ungültige Eingabe. Bitte 1–6 eingeben." << std::endl;
+            }
         }
-        genome.printSummary();
-
-        // Schritt 2: Disease-Liste einlesen
-        Disease cancer("Cancer");
-        cancer.loadRiskSNPsFromFile("data/disease/CancerGenes_snps.tsv");
-
-        /*for (const auto& snp : cancer.getRiskSNPs()) {
-            std::cout << snp.rsID << " → " << snp.function << std::endl;
-        }*/
-        cancer.printRiskSNPs();
-
-        Disease mcas("MCAS");
-        mcas.loadRiskSNPsFromFile("data/disease/MCAS_snps.tsv");
-        
-
-        // Schritt 3: Analyse starten
-        Analyzer try_1;
-        try_1.runAnalysis(genome,cancer);
-        try_1.printSummary();
-
-        Analyzer try_2;
-        try_2.runAnalysis(genome,mcas);
-        try_2.printSummary();
-        try_2.saveResults("data/output/results_demo.txt");
-
 
         return 0;
     }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
+    catch (const std::exception& e) {
+        std::cerr << "Fehler: " << e.what() << std::endl;
         return -1;
     }
 }
