@@ -88,8 +88,9 @@ Die Funktionen werden in der jewiligen Klasse beschrieben und im main eine Beisp
 
 - Analyse mehrerer Krankheiten gleichzeitig
 - CSV/HTML-Ausgabe
-- Visualisierung per Balkendiagramm
-- Erweiterbare Gen-Sets (BRCA1, MTHFR, DAO etc.)
+- Erweiterung des Genome-Modells mit Personendaten (Alter, BMI, Lebensstil)
+- RiskAnalyzer v2: gewichtete Risikoallele, bessere Visualisierung
+- Terminal-UI mit Menüführung
 
 ---
 
