@@ -135,3 +135,8 @@ void Analyzer::saveResults(const std::string& filename) const {
     out << "----------------------------------------------------------------------------\n";
     out.close();
 }
+
+bool Analyzer::isInitialized() const {
+    return genome != nullptr && disease != nullptr;
+}
+

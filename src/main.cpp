@@ -67,6 +67,7 @@ int main() {
         bool running = true;
         while (running) {
             std::cout << "\n===== Menü =====\n";
+            std::cout << "\nBitte führen Sie diese Analyse in der richtigen Reihenfolge durch\n";
             std::cout << "[1] Genome-Datei laden\n";
             std::cout << "[2] Krankheit laden \n";
             std::cout << "[3] Analyse starten\n";
@@ -119,10 +120,20 @@ int main() {
                     analyzer.runAnalysis(genome, disease);
                     std::cout << "🔬 Analyse abgeschlossen." << std::endl;
                     break;
-                case 4:
+                case 4:{
+                    if (!analyzer.isInitialized()) {
+                        std::cout << "⚠ Bitte zuerst eine Analyse durchführen (Option 3)." << std::endl;
+                        break;
+                    }
+                    
                     analyzer.printSummary();
                     break;
+                }
                 case 5:{
+                    if (!analyzer.isInitialized()) {
+                        std::cout << "⚠ Bitte zuerst eine Analyse durchführen (Option 3)." << std::endl;
+                        break;
+                    }                    
                     std::string filename = "data/output/" + genome.getSampleID() + "_" + disease.getName() + "_results.txt";
                     analyzer.saveResults(filename);
                     std::cout << "💾 Ergebnisse gespeichert unter: " << filename << std::endl;

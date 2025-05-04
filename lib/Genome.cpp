@@ -67,8 +67,12 @@ void Genome::setSampleID(const std::string& id) {
     m_sampleID = id;
 }
 std::string Genome::getSampleID() const {
+    if (m_sampleID.empty()) {
+        throw std::runtime_error("Sample ID wurde noch nicht gesetzt.");
+    }
     return m_sampleID;
 }
+
 
 // SNPs Functions: 
 const SNP* Genome::getSNPByID(const std::string& rsID) const {

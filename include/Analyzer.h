@@ -54,6 +54,8 @@ public:
     // Gibt den Risiko-Level als String zurück
     static std::string riskLevelToString(RiskLevel level);
 
+    bool isInitialized() const;
+
 private:
     const Genome* genome = nullptr;                // Referenz auf das untersuchte Genom
     const Disease* disease = nullptr;              // Referenz auf die betrachtete Krankheit
