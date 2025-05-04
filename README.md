@@ -66,9 +66,11 @@ mkdir build
 cd build
 cmake ..
 make
-./GenAnalyzer
+cd ..
+.\build\GenAnalyzer
 ```
-
+Hier gibt es leider Probleme wenn man im Build Ordner startet und es kann nicht richtig auf data zugegriffen werden.
+Deshalb in das Überverzeichnis wechseln und mit .\build\GenAnalyzer starten
 ---
 
 ## Abhängigkeiten
