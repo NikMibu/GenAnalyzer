@@ -135,7 +135,6 @@ rs5219      KCNJ11      Kaliumkanal / Insulinfreisetzung
 
 ## Erweiterungsmöglichkeiten
 
-- Analyse mehrerer Krankheiten gleichzeitig
 - CSV/HTML-Ausgabe
 - Erweiterung des Genome-Modells mit Personendaten (Alter, BMI, Lebensstil)
 - RiskAnalyzer v2: gewichtete Risikoallele, bessere Visualisierung
@@ -144,4 +143,4 @@ rs5219      KCNJ11      Kaliumkanal / Insulinfreisetzung
 ---
 
 **Autor**: Niklas Mitterbuchner
-**Projekt für:** C++ Abgabeprojekt SS  
+**Projekt für:** C++ Softwareentwicklung Abgabeprojekt SS  
