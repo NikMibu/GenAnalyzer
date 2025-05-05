@@ -1,11 +1,10 @@
-Analysis Date: Fri May 02 12:14:23 2025
-----------------------------------------
+Analysis Date: Mon May 05 17:42:36 2025
 SampleID: DemoSample
 SNPCount: 677436
-Disease: MCAS
-Treffer: 10
+========================================
+Krankheit: MCAS_snps
+Treffer: 10 / 15
 Risiko-Score: 12 (Hoch)
-----------------------------------------
 rsID        Genotyp   Status                   Gen       Funktion
 ----------------------------------------------------------------------------
 rs10156191  TC        Heterozygous             DAO       Histaminabbau (Darm)
@@ -19,3 +18,4 @@ rs1695      AG        Heterozygous             GSTP1     Entgiftung / Phase II
 rs4880      AG        Heterozygous             SOD2      Mitochondrien / Superoxid
 rs1801133   AG        Heterozygous             MTHFR     Methylierung / Homocystein
 ----------------------------------------------------------------------------
+
