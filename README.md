@@ -81,8 +81,48 @@ Deshalb in das Überverzeichnis wechseln und mit .\build\GenAnalyzer starten
 
 ---
 
-## Funktionen
-Die Funktionen werden in der jewiligen Klasse beschrieben und im main eine Beispiel Analyse ausgeführt und ein Results Demo Datei erstellt.
+## 🧠 Funktionen
+
+Die Hauptfunktionen von **GenAnalyzer** sind in den jeweiligen Klassen modular implementiert:
+
+- **`Genome`**: Lädt und speichert SNP-Daten eines genetischen Rohdatensatzes
+- **`Disease`**: Enthält Risiko-SNPs für eine bestimmte Krankheit
+- **`Analyzer`**: Vergleicht Genome mit Risiko-SNPs und bewertet genetische Risiken
+
+Im `main()`-Programm wird eine Beispielanalyse durchgeführt. Dabei können:
+
+- ein Genome geladen,
+- eine oder mehrere Krankheiten ausgewählt,
+- die Analyse gestartet,
+- Ergebnisse angezeigt und
+- ein Ergebnisbericht exportiert werden.
+
+Bei erfolgreicher Analyse wird automatisch eine Datei im Verzeichnis `data/output/` erstellt, z. B.:
+data/output/DemoSample_results.txt
+
+Diese Datei dient als **Beispielausgabe (Demo)** für die Analyseergebnisse.
+
+---
+
+## Neue Krankheiten hinzufügen
+GenAnalyzer erkennt automatisch alle Krankheitsdateien im Ordner data/disease/, die im .tsv-Format vorliegen. Es sind keine Codeänderungen nötig.
+
+### So fügst du eine neue Krankheit hinzu:
+Erstelle eine Datei im Ordner data/disease/, z. B.
+Type2Diabetes.tsv
+
+Füge folgende Struktur ein:
+
+rsID    gene    function
+rs1801282	PPARG	Insulinsensitivität / Adipogenese
+rs7754840	CDKAL1	Insulinsekretion / Beta-Zellen
+rs13266634	SLC30A8	Zinktransporter / Glukosehomöostase
+rs5219	KCNJ11	Kaliumkanal / Insulinfreisetzung
+(Spalten durch Tabulatoren getrennt – kein Komma oder Leerzeichen.)
+
+Starte das Programm neu
+→ Die Datei wird automatisch erkannt
+→ "Type2Diabetes" erscheint im Auswahlmenü
 
 ---
 
