@@ -59,7 +59,7 @@ Die Verteilung der Risikoallele, ihre Populationshäufigkeit sowie Interaktionen
 
 ---
 
-## Kompilieren & Ausführen
+## ⚙️ Kompilieren & Ausführen
 
 ```bash
 mkdir build
@@ -69,9 +69,12 @@ make
 cd ..
 .\build\GenAnalyzer
 ```
-Hier gibt es leider Probleme wenn man im Build Ordner startet und es kann nicht richtig auf data zugegriffen werden.
-Deshalb in das Überverzeichnis wechseln und mit .\build\GenAnalyzer starten
----
+>Hinweis:
+>Wenn das Programm aus dem build/-Verzeichnis gestartet wird, kann es nicht korrekt auf die Dateien im data/-Ordner zugreifen.
+
+Lösung:
+- Wechsle eine Ebene nach oben und starte GenAnalyzer von dort -> .\build\GenAnalyzer
+- Dadurch bleibt das Arbeitsverzeichnis korrekt und relative Pfade zu data/ funktionieren wie vorgesehen.
 
 ## Abhängigkeiten
 
