@@ -83,11 +83,11 @@ Deshalb in das Überverzeichnis wechseln und mit .\build\GenAnalyzer starten
 
 ## 🧠 Funktionen
 
-Die Hauptfunktionen von **GenAnalyzer** sind in den jeweiligen Klassen modular implementiert:
+Die Hauptfunktionen von GenAnalyzer sind in den jeweiligen Klassen modular implementiert:
 
-- **`Genome`**: Lädt und speichert SNP-Daten eines genetischen Rohdatensatzes
-- **`Disease`**: Enthält Risiko-SNPs für eine bestimmte Krankheit
-- **`Analyzer`**: Vergleicht Genome mit Risiko-SNPs und bewertet genetische Risiken
+- `Genome`: Lädt und speichert SNP-Daten eines genetischen Rohdatensatzes
+- `Disease`: Enthält Risiko-SNPs für eine bestimmte Krankheit
+- `Analyzer`: Vergleicht Genome mit Risiko-SNPs und bewertet genetische Risiken
 
 Im `main()`-Programm wird eine Beispielanalyse durchgeführt. Dabei können:
 
@@ -100,31 +100,38 @@ Im `main()`-Programm wird eine Beispielanalyse durchgeführt. Dabei können:
 Bei erfolgreicher Analyse wird automatisch eine Datei im Verzeichnis `data/output/` erstellt, z. B.:
 data/output/DemoSample_results.txt
 
-Diese Datei dient als **Beispielausgabe (Demo)** für die Analyseergebnisse.
+Diese Datei dient als Beispielausgabe (Demo) für die Analyseergebnisse.
 
 ---
 
-## Neue Krankheiten hinzufügen
-GenAnalyzer erkennt automatisch alle Krankheitsdateien im Ordner data/disease/, die im .tsv-Format vorliegen. Es sind keine Codeänderungen nötig.
+## 🧬 Neue Krankheiten hinzufügen
 
-### So fügst du eine neue Krankheit hinzu:
-Erstelle eine Datei im Ordner data/disease/, z. B.
+GenAnalyzer erkennt automatisch alle Krankheitsdateien im Ordner `data/disease/`, die im `.tsv`-Format vorliegen. Es sind keine Codeänderungen nötig.
+
+1. Erstelle eine Datei im Ordner `data/disease/`, z. B.:
+   
+```
 Type2Diabetes.tsv
+````
 
-Füge folgende Struktur ein:
+2. Füge folgende Struktur ein:
 
-rsID    gene    function
-rs1801282	PPARG	Insulinsensitivität / Adipogenese
-rs7754840	CDKAL1	Insulinsekretion / Beta-Zellen
-rs13266634	SLC30A8	Zinktransporter / Glukosehomöostase
-rs5219	KCNJ11	Kaliumkanal / Insulinfreisetzung
-(Spalten durch Tabulatoren getrennt – kein Komma oder Leerzeichen.)
+```tsv
+rsID        gene        function
+rs1801282   PPARG       Insulinsensitivität / Adipogenese
+rs7754840   CDKAL1      Insulinsekretion / Beta-Zellen
+rs13266634  SLC30A8     Zinktransporter / Glukosehomöostase
+rs5219      KCNJ11      Kaliumkanal / Insulinfreisetzung
+````
 
-Starte das Programm neu
-→ Die Datei wird automatisch erkannt
-→ "Type2Diabetes" erscheint im Auswahlmenü
+> 🔹 Hinweis: Spalten müssen durch Tabulatoren getrennt sein – kein Komma oder Leerzeichen!
+
+3. Starte das Programm neu
+   - Die Datei wird automatisch erkannt
+   - `"Type2Diabetes"` erscheint im Auswahlmenü
 
 ---
+
 
 ## Erweiterungsmöglichkeiten
 
