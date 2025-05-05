@@ -81,7 +81,7 @@ Deshalb in das Überverzeichnis wechseln und mit .\build\GenAnalyzer starten
 
 ---
 
-## 🧠 Funktionen
+## Funktionen
 
 Die Hauptfunktionen von GenAnalyzer sind in den jeweiligen Klassen modular implementiert:
 
@@ -104,7 +104,7 @@ Diese Datei dient als Beispielausgabe (Demo) für die Analyseergebnisse.
 
 ---
 
-## 🧬 Neue Krankheiten hinzufügen
+## Neue Krankheiten hinzufügen
 
 GenAnalyzer erkennt automatisch alle Krankheitsdateien im Ordner `data/disease/`, die im `.tsv`-Format vorliegen. Es sind keine Codeänderungen nötig.
 
