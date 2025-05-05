@@ -59,7 +59,7 @@ Die Verteilung der Risikoallele, ihre Populationshäufigkeit sowie Interaktionen
 
 ---
 
-## ⚙️ Kompilieren & Ausführen
+## Kompilieren & Ausführen
 
 ```bash
 mkdir build
