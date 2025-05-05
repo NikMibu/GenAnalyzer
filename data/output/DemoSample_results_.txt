@@ -1,0 +1,39 @@
+Analysis Date: Mon May 05 18:41:06 2025
+SampleID: DemoSample
+SNPCount: 677436
+========================================
+Krankheit: Cancer
+Treffer: 8 / 15
+Risiko-Score: 12 (Hoch)
+rsID        Genotyp   Status                   Gen       Funktion
+----------------------------------------------------------------------------
+rs1042522   CC        Homozygous Recessive     TP53      Zellzyklus, Tumorsuppressor (Arg72Pro)
+rs78378222  TT        Homozygous Recessive     TP53      Krebsrisiko (seltene Variante)
+rs12628     GG        Homozygous Recessive     HRAS      Zellwachstum, Onkogenpotential
+rs1903858   AA        Homozygous Dominant      PTEN      Krebsrisiko
+rs17849079  CC        Homozygous Recessive     PIK3CA    Onkogenpotential, Krebsrisiko
+rs1799950   TT        Homozygous Recessive     BRCA1     Brust-/Eierstockkrebs-Risiko
+rs799917    AG        Heterozygous             BRCA1     Brustkrebs-Prädisposition
+rs16941     TC        Heterozygous             BRCA1     Krebsrisiko, DNA-Reparatur
+----------------------------------------------------------------------------
+
+Krankheit: HistaminIntolerance
+Treffer: 3 / 4
+Risiko-Score: 4 (Mäßig erhöht)
+rsID        Genotyp   Status                   Gen       Funktion
+----------------------------------------------------------------------------
+rs2071517   GG        Homozygous Recessive     HNMT      Abbau Histamin / intrazellulär
+rs1049748   TC        Heterozygous             DAO       Enzymaktivität reduziert
+rs2052129   TG        Heterozygous             ABP1      Histaminbindung / intestinale Reaktion
+----------------------------------------------------------------------------
+
+Krankheit: HistaminIntolerance
+Treffer: 3 / 4
+Risiko-Score: 4 (Mäßig erhöht)
+rsID        Genotyp   Status                   Gen       Funktion
+----------------------------------------------------------------------------
+rs2071517   GG        Homozygous Recessive     HNMT      Abbau Histamin / intrazellulär
+rs1049748   TC        Heterozygous             DAO       Enzymaktivität reduziert
+rs2052129   TG        Heterozygous             ABP1      Histaminbindung / intestinale Reaktion
+----------------------------------------------------------------------------
+

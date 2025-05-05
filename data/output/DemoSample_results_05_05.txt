@@ -1,36 +1,25 @@
-Analysis Date: Mon May 05 17:58:03 2025
+Analysis Date: Mon May 05 18:36:44 2025
 SampleID: DemoSample
 SNPCount: 677436
 ========================================
-Krankheit: LaktoseIntolerance
-Treffer: 3 / 3
+Krankheit: HistaminIntolerance
+Treffer: 3 / 4
 Risiko-Score: 4 (Mäßig erhöht)
 rsID        Genotyp   Status                   Gen       Funktion
 ----------------------------------------------------------------------------
-rs145946881 CC        Homozygous Recessive     LCT       Enzymaktivität Laktase / Abbau Milchzucker
-rs2322659   TC        Heterozygous             MCM6      Genregulation LCT
-rs182549    TC        Heterozygous             MCM6      Enhanceraktivität / Europäische Population
+rs2071517   GG        Homozygous Recessive     HNMT      Abbau Histamin / intrazellulär
+rs1049748   TC        Heterozygous             DAO       Enzymaktivität reduziert
+rs2052129   TG        Heterozygous             ABP1      Histaminbindung / intestinale Reaktion
 ----------------------------------------------------------------------------
 
-Krankheit: LaktoseIntolerance
-Treffer: 3 / 3
+Krankheit: HistaminIntolerance
+Treffer: 3 / 4
 Risiko-Score: 4 (Mäßig erhöht)
 rsID        Genotyp   Status                   Gen       Funktion
 ----------------------------------------------------------------------------
-rs145946881 CC        Homozygous Recessive     LCT       Enzymaktivität Laktase / Abbau Milchzucker
-rs2322659   TC        Heterozygous             MCM6      Genregulation LCT
-rs182549    TC        Heterozygous             MCM6      Enhanceraktivität / Europäische Population
-----------------------------------------------------------------------------
-
-Krankheit: Typ2Diabetes
-Treffer: 4 / 4
-Risiko-Score: 5 (Mäßig erhöht)
-rsID        Genotyp   Status                   Gen       Funktion
-----------------------------------------------------------------------------
-rs1801282   CG        Heterozygous             PPARG     Insulinsensitivität / Adipogenese
-rs7754840   CG        Heterozygous             CDKAL1    Insulinsekretion / Beta-Zellen
-rs13266634  CC        Homozygous Recessive     SLC30A8   Zinktransporter / Glukosehomöostase
-rs5219      TC        Heterozygous             KCNJ11    Kaliumkanal / Insulinfreisetzung
+rs2071517   GG        Homozygous Recessive     HNMT      Abbau Histamin / intrazellulär
+rs1049748   TC        Heterozygous             DAO       Enzymaktivität reduziert
+rs2052129   TG        Heterozygous             ABP1      Histaminbindung / intestinale Reaktion
 ----------------------------------------------------------------------------
 
 Krankheit: MCAS
@@ -48,5 +37,44 @@ rs6323      TT        Homozygous Recessive     MAO-A     Monoaminoxidase / Reizv
 rs1695      AG        Heterozygous             GSTP1     Entgiftung / Phase II
 rs4880      AG        Heterozygous             SOD2      Mitochondrien / Superoxid
 rs1801133   AG        Heterozygous             MTHFR     Methylierung / Homocystein
+----------------------------------------------------------------------------
+
+Krankheit: MCAS
+Treffer: 10 / 15
+Risiko-Score: 12 (Hoch)
+rsID        Genotyp   Status                   Gen       Funktion
+----------------------------------------------------------------------------
+rs10156191  TC        Heterozygous             DAO       Histaminabbau (Darm)
+rs2052129   TG        Heterozygous             DAO       Histaminabbau (Darm)
+rs11558538  CC        Homozygous Recessive     HNMT      Histaminabbau (intrazellulär)
+rs2243250   CC        Homozygous Recessive     IL4       Zytokin / IgE-Steuerung
+rs2251746   TC        Heterozygous             FCER1A    IgE-Rezeptor / Allergieneigung
+rs4680      AA        Homozygous Dominant      COMT      Neurotransmitter / Stressverarbeitung
+rs6323      TT        Homozygous Recessive     MAO-A     Monoaminoxidase / Reizverarbeitung
+rs1695      AG        Heterozygous             GSTP1     Entgiftung / Phase II
+rs4880      AG        Heterozygous             SOD2      Mitochondrien / Superoxid
+rs1801133   AG        Heterozygous             MTHFR     Methylierung / Homocystein
+----------------------------------------------------------------------------
+
+Krankheit: Typ2Diabetes
+Treffer: 4 / 4
+Risiko-Score: 5 (Mäßig erhöht)
+rsID        Genotyp   Status                   Gen       Funktion
+----------------------------------------------------------------------------
+rs1801282   CG        Heterozygous             PPARG     Insulinsensitivität / Adipogenese
+rs7754840   CG        Heterozygous             CDKAL1    Insulinsekretion / Beta-Zellen
+rs13266634  CC        Homozygous Recessive     SLC30A8   Zinktransporter / Glukosehomöostase
+rs5219      TC        Heterozygous             KCNJ11    Kaliumkanal / Insulinfreisetzung
+----------------------------------------------------------------------------
+
+Krankheit: Typ2Diabetes
+Treffer: 4 / 4
+Risiko-Score: 5 (Mäßig erhöht)
+rsID        Genotyp   Status                   Gen       Funktion
+----------------------------------------------------------------------------
+rs1801282   CG        Heterozygous             PPARG     Insulinsensitivität / Adipogenese
+rs7754840   CG        Heterozygous             CDKAL1    Insulinsekretion / Beta-Zellen
+rs13266634  CC        Homozygous Recessive     SLC30A8   Zinktransporter / Glukosehomöostase
+rs5219      TC        Heterozygous             KCNJ11    Kaliumkanal / Insulinfreisetzung
 ----------------------------------------------------------------------------
 

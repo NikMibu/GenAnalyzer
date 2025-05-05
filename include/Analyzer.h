@@ -16,15 +16,17 @@ enum class RiskLevel {
 };
 
 // Ergebnis einer einzelnen Krankheitsanalyse
-struct AnalysisResult {
-    Disease disease;
-    std::vector<const SNP*> matchedSNPs;
-    std::vector<DiseaseSNP> matchedDiseaseSNPs;
-    int score = 0;
-    int total_score = 0;
-
-    AnalysisResult(const Disease& d) : disease(d) {}
+class AnalysisResult {
+    public:
+        Disease disease;
+        std::vector<const SNP*> matchedSNPs;
+        std::vector<DiseaseSNP> matchedDiseaseSNPs;
+        int score = 0;
+        int total_score = 0;
+    
+        AnalysisResult(const Disease& d) : disease(d) {}
 };
+    
 
 
 class Analyzer {

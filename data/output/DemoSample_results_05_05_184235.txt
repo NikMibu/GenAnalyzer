@@ -1,0 +1,24 @@
+Analysis Date: Mon May 05 18:42:35 2025
+SampleID: DemoSample
+SNPCount: 677436
+========================================
+Krankheit: Gilbert_Syndrom
+Treffer: 2 / 3
+Risiko-Score: 4 (Mäßig erhöht)
+rsID        Genotyp   Status                   Gen       Funktion
+----------------------------------------------------------------------------
+rs4148323   GG        Homozygous Recessive     UGT1A1    UGT1A1*6 – häufig in asiatischen Populationen, reduzierte Enzymaktivität
+rs34946978  CC        Homozygous Recessive     UGT1A1    UGT1A1*37 – seltene Variante mit stark reduzierter Aktivität
+----------------------------------------------------------------------------
+
+Krankheit: Alzheimer
+Treffer: 4 / 4
+Risiko-Score: 5 (Mäßig erhöht)
+rsID        Genotyp   Status                   Gen       Funktion
+----------------------------------------------------------------------------
+rs9331896   TC        Heterozygous             CLU       Zelluläre Reinigung / Alzheimer-Risiko
+rs744373    AG        Heterozygous             BIN1      Endozytose / Tau-Pathologie
+rs6733839   CC        Homozygous Recessive     MS4A6A    Entzündungsregulation
+rs11136000  TC        Heterozygous             CREM      Transkriptionsregulation
+----------------------------------------------------------------------------
+

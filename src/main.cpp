@@ -159,8 +159,8 @@ int main() {
                     tm* localTime = localtime(&now);  // Lokale Zeitstruktur
 
                     // Erzeuge ein Format wie "16_04" (Tag_Monat)
-                    char dateStr[10];
-                    strftime(dateStr, sizeof(dateStr), "%d_%m", localTime);
+                    char dateStr[20];
+                    strftime(dateStr, sizeof(dateStr), "%d_%m_%H%M%S", localTime);
 
                     std::string filename = "data/output/" + genome.getSampleID() + "_results_" + dateStr + ".txt";
 
